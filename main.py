@@ -14,6 +14,7 @@ import jokes
 import subprocess
 import gui
 import google_search
+import managefaceencodings
 options = Options()
 options.add_argument('start-maximized')
 options.add_experimental_option("useAutomationExtension", False)
@@ -77,6 +78,19 @@ class Youtube:
     def closebrowser(self):
         self.browser.close()
 
+face = managefaceencodings.detectfaces()
+if face != None:
+    if face != "Unknown":
+        if face == "Vartika":
+            print("Hello Vartika, how are you")
+        elif face == "Sweta":
+            print("Hello sweta")
+        elif face == "Sankalp":
+            print("Hello master Sankalp")
+        else:
+            print("Hello", face)
+
+
 while True:
     say = listen()
     if "Lucy" in say:
@@ -101,6 +115,15 @@ while True:
                 sleep(1)
                 pyautogui.click()
 
+        if "browser" in say:
+            url = say[10:]
+            url = url[:-11]
+            if say == "Lucy open browser":
+                webbrowser.open("https://www.google.com", new = 0)
+            
+            if say == "Lucy open " + str(url) + " on browser":
+                webbrowser.open(url, new = 0)
+
         if "Lucy what is the meaning of" in say:
             query = say[5:]
             result = google_search.googleanswerbox(query)
@@ -121,7 +144,7 @@ while True:
 
         if "weather" in say:
             city = say[21:]
-            if say == "Lucy show weather":
+            if say == "Lucy show weather" or say == "Lucy show me the weather":
                 w = weather.showweather()
                 texttospeech.createfilemp3(w)
                 subprocess.Popen('./texttospeech.sh', shell=True)
