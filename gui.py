@@ -13,6 +13,9 @@ def createlinedtext(text):
     for i in text:
         count += 1
         formattedoutput += i
+        if i == "\n":
+            plustime += int(count/60)*3
+            count = 0
         if i == " ":
             if count > 60:
                 count = 0

@@ -111,7 +111,7 @@ while True:
                 spurl = "https://open.spotify.com/search/" + str(song)
                 webbrowser.open(spurl, new=0)
                 sleep(10)
-                pyautogui.moveTo(644, 461)
+                pyautogui.moveTo(694, 447)
                 sleep(1)
                 pyautogui.click()
 
